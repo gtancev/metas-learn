@@ -29,7 +29,6 @@ class GaussianMixtureModel:
         self.best_gamma = None
 
     def _E_step(self, X, pi, mu, sigma):
-
         """
         Performs E-step on GMM model.
         Input:
@@ -61,7 +60,6 @@ class GaussianMixtureModel:
         return gamma
 
     def _M_step(self, X, gamma):
-
         """
         Performs M-step on GMM model
         Input:
