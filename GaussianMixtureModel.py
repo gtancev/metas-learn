@@ -8,7 +8,7 @@ import numpy as np
 class GaussianMixtureModel:
     def __init__(self, n_components=2, rtol=1e-6, max_iter=50, restarts=10):
         """
-        Creates GaussianMixtureModel object.
+        Creates GaussianMixtureModel instance.
         Input:
         n_components: int, number of Gaussians (classes) in the mixture
         rtol: float, relative change for convergence check
@@ -29,7 +29,6 @@ class GaussianMixtureModel:
         self.best_gamma = None
 
     def _E_step(self, X, pi, mu, sigma):
-
         """
         Performs E-step on GMM model.
         Input:
@@ -61,7 +60,6 @@ class GaussianMixtureModel:
         return gamma
 
     def _M_step(self, X, gamma):
-
         """
         Performs M-step on GMM model
         Input:
