@@ -16,7 +16,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
   	scaler = StandardScaler()
   	X, y = load_boston(return_X_y=True)
   	X, y = scaler.fit_transform(X), scaler.fit_transform(y.reshape(-1, 1))
-  	nnr = NeuralNetworkRegressor(hidden_layer_sizes=(10,))
+  	nnr = NeuralNetworkRegressor(hidden_layer_sizes=(10,), alpha=1.0)
   
 ### Fit model.
 	nnr.fit(X, y)
