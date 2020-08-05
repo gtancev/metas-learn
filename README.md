@@ -35,7 +35,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	ax.set_yticks(np.round(np.linspace(0,50,5),2))
 	plt.show()
 	
-![loss](loss.png)
+![loss](Figures/loss.png)
 
 	fig = plt.figure(figsize=(2.95,2.95))
 	ax = fig.add_subplot(111)
@@ -48,4 +48,4 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	ax.set_yticks(np.round(np.linspace(-4,4,5),2))
 	plt.show()
 	
-![congruency](congruency.png)
+![congruency](Figures/congruency.png)
