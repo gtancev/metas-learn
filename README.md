@@ -4,10 +4,10 @@ Collection of machine learning algorithms implemented in Python as part of an In
 ## Example
 
 ### Load libraries.
+  	from StandardScaler import StandardScaler
 	from NeuralNetworkRegressor import NeuralNetworkRegressor
 	import numpy as np
 	from sklearn.datasets import load_boston
-  	from sklearn.preprocessing import StandardScaler
 	import matplotlib.pyplot as plt
   
 ### Load data.
