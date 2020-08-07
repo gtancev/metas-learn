@@ -6,18 +6,14 @@ import numpy as np
 
 
 class GaussianMixtureModel:
+    """
+    Implementation of a Gaussian mixture with expectation-maximization.
+    Input:  n_components: int, number of Gaussians (classes) in the mixture
+            rtol: float, relative change for convergence check
+            max_iter: int, maximum number of E- & M-step iterations
+            restarts: int, number of different starting positions
+    """
     def __init__(self, n_components=2, rtol=1e-6, max_iter=50, restarts=10):
-        """
-        Creates GaussianMixtureModel instance.
-        Input:
-        n_components: int, number of Gaussians (classes) in the mixture
-        rtol: float, relative change for convergence check
-        max_iter: int, maximum number of E- & M-step iterations
-        restarts: int, number of different starting positions
-
-        Output:
-        Instance of GaussianMixtureModel.
-        """
         self.n_components = n_components
         self.rtol = rtol
         self.max_iter = max_iter
@@ -40,7 +36,6 @@ class GaussianMixtureModel:
         Output:
         gamma: (N x C), probabilities of clusters for objects
         """
-
         N = X.shape[0]  # number of objects
         C = pi.shape[0]  # number of clusters
         d = mu.shape[1]  # dimension of each object
@@ -71,7 +66,6 @@ class GaussianMixtureModel:
         mu: (C x d)
         sigma: (C x d x d)
         """
-
         N = X.shape[0]  # number of objects
         C = gamma.shape[1]  # number of clusters
         d = X.shape[1]  # dimension of each object
@@ -102,7 +96,6 @@ class GaussianMixtureModel:
         Output:
         Value of variational lower bound (VLB).
         """
-
         N = X.shape[0]  # number of objects
         C = gamma.shape[1]  # number of clusters
         d = X.shape[1]  # dimension of each object
@@ -129,7 +122,6 @@ class GaussianMixtureModel:
         Input:
         X: (N, d), data points
         '''
-
         # Define hyperparameters.
         C = self.n_components
         rtol = self.rtol
