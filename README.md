@@ -51,3 +51,24 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	plt.show()
 	
 ![congruency](Figures/congruency.png)
+
+### Classification
+
+#### Load libraries.
+  	from StandardScaler import StandardScaler
+	from LogisticClassifier import LogisticClassifier
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	import matplotlib.pyplot as plt
+  
+#### Load data.
+As a guidline, it is recommended to scale data before training, e.g. using a standard scaling (zero mean, unit variance).
+
+  	scaler = StandardScaler()
+  	X, y = load_breast_cancer(return_X_y=True)
+  	X = scaler.fit_transform(X)
+  	lc = LogisticClassifier(alpha=1.0)
+  
+#### Fit model.
+	lc.fit(X, y)
+	y_pred = lc.predict(X)
