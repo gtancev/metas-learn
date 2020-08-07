@@ -1,16 +1,18 @@
 # metas-learn
 Collection of machine learning algorithms implemented in Python as part of an Innosuisse project (36779.1 IP-ENG), read more about it here: https://www.aramis.admin.ch/Grunddaten/?ProjectID=44523.
 
-## Example
+## Examples
 
-### Load libraries.
+### Regression
+
+#### Load libraries.
   	from StandardScaler import StandardScaler
 	from NeuralNetworkRegressor import NeuralNetworkRegressor
 	import numpy as np
 	from sklearn.datasets import load_boston
 	import matplotlib.pyplot as plt
   
-### Load data.
+#### Load data.
 As a guidline, it is recommended to scale data before training, e.g. using a standard scaling (zero mean, unit variance).
 
   	scaler = StandardScaler()
@@ -18,11 +20,11 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
   	X, y = scaler.fit_transform(X), scaler.fit_transform(y.reshape(-1, 1))
   	nnr = NeuralNetworkRegressor(hidden_layer_sizes=(10,), alpha=1.0)
   
-### Fit model.
+#### Fit model.
 	nnr.fit(X, y)
 	y_pred = nnr.predict(X)
 	
-### Evaluate model.
+#### Evaluate model.
 
 	fig = plt.figure(figsize=(2.95,2.95))
 	ax = fig.add_subplot(111)
@@ -49,3 +51,39 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	plt.show()
 	
 ![congruency](Figures/congruency.png)
+
+### Classification
+
+#### Load libraries.
+  	from StandardScaler import StandardScaler
+	from LogisticClassifier import LogisticClassifier
+	import numpy as np
+	from sklearn.datasets import load_breast_cancer
+	import matplotlib.pyplot as plt
+  
+#### Load data.
+As a guidline, it is recommended to scale data before training, e.g. using a standard scaling (zero mean, unit variance).
+
+  	scaler = StandardScaler()
+  	X, y = load_breast_cancer(return_X_y=True)
+  	X = scaler.fit_transform(X)
+  	lc = LogisticClassifier(alpha=1.0)
+  
+#### Fit model.
+	lc.fit(X, y)
+	y_pred = lc.predict(X)
+	
+#### Evaluate model.
+
+	fig = plt.figure(figsize=(2.95,2.95))
+	ax = fig.add_subplot(111)
+	ax.plot(np.arange(1, len(lc.loss)+1), lc.loss, ".", ms=4, color=plt.cm.viridis(0.5), alpha=1.0)
+	ax.set_xlabel('iteration')
+	ax.set_ylabel('loss')
+	ax.set_xlim(1e-1, 1e4)
+	ax.set_ylim(0, 1)
+	ax.set_xticks(np.round(np.linspace(0,1e4,5),2))
+	ax.set_yticks(np.round(np.linspace(0,1,5),2))
+	plt.show()
+	
+![loss](Figures/loss_.png)
