@@ -6,6 +6,15 @@ import numpy as np
 
 
 class LinearRegressor:
+    """
+    Linear regression implementation.
+    It uses stochastic gradient descent (SGD) with random sampling of batches.
+    Inputs: batch_size: size of batch in SGD steps
+            alpha: L2-regularization parameter in SGD steps
+            learning_rate: learning rate in SGD steps
+            n_iterations: number of SGD iterations
+            warm_start: whether to use old parameters as starting point
+    """
     def __init__(self, batch_size=300, alpha=0.0, learning_rate=1e-3, n_iterations=1e4, warm_start=False):
         self.batch_size = batch_size
         self.alpha = alpha
