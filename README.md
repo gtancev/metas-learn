@@ -3,14 +3,16 @@ Collection of machine learning algorithms implemented in Python as part of an In
 
 ## Example
 
-### Load libraries.
+### Refression
+
+#### Load libraries.
   	from StandardScaler import StandardScaler
 	from NeuralNetworkRegressor import NeuralNetworkRegressor
 	import numpy as np
 	from sklearn.datasets import load_boston
 	import matplotlib.pyplot as plt
   
-### Load data.
+#### Load data.
 As a guidline, it is recommended to scale data before training, e.g. using a standard scaling (zero mean, unit variance).
 
   	scaler = StandardScaler()
@@ -18,11 +20,11 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
   	X, y = scaler.fit_transform(X), scaler.fit_transform(y.reshape(-1, 1))
   	nnr = NeuralNetworkRegressor(hidden_layer_sizes=(10,), alpha=1.0)
   
-### Fit model.
+#### Fit model.
 	nnr.fit(X, y)
 	y_pred = nnr.predict(X)
 	
-### Evaluate model.
+#### Evaluate model.
 
 	fig = plt.figure(figsize=(2.95,2.95))
 	ax = fig.add_subplot(111)
