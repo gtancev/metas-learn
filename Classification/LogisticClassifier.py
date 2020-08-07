@@ -65,7 +65,7 @@ class LogisticClassifier:
         Input:  Z
         Output: Sigmoid(Z)
         """
-        return 1.0/(1.0 + np.exp(-Z))
+        return np.divide(1.0, np.add(1.0, np.exp(-Z)))
 
     def _initialize_coeffs(self, n_features, n_outputs):
         """
