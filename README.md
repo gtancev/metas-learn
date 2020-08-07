@@ -72,3 +72,18 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 #### Fit model.
 	lc.fit(X, y)
 	y_pred = lc.predict(X)
+	
+#### Evaluate model.
+
+	fig = plt.figure(figsize=(2.95,2.95))
+	ax = fig.add_subplot(111)
+	ax.plot(np.arange(1, len(lc.loss)+1), lc.loss, ".", ms=4, color=plt.cm.viridis(0.5), alpha=1.0)
+	ax.set_xlabel('iteration')
+	ax.set_ylabel('loss')
+	ax.set_xlim(1e-1, 1e4)
+	ax.set_ylim(0, 50)
+	ax.set_xticks(np.round(np.linspace(0,1e4,5),2))
+	ax.set_yticks(np.round(np.linspace(0,50,5),2))
+	plt.show()
+	
+![loss](Figures/loss_.png)
