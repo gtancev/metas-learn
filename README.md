@@ -1,9 +1,9 @@
 # metas-learn
 Collection of machine learning algorithms implemented in Python as part of an Innosuisse project (36779.1 IP-ENG), read more about it here: https://www.aramis.admin.ch/Grunddaten/?ProjectID=44523.
 
-## Example
+## Examples
 
-### Refression
+### Regression
 
 #### Load libraries.
   	from StandardScaler import StandardScaler
