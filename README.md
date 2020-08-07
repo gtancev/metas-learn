@@ -81,9 +81,9 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	ax.set_xlabel('iteration')
 	ax.set_ylabel('loss')
 	ax.set_xlim(1e-1, 1e4)
-	ax.set_ylim(0, 50)
+	ax.set_ylim(0, 1)
 	ax.set_xticks(np.round(np.linspace(0,1e4,5),2))
-	ax.set_yticks(np.round(np.linspace(0,50,5),2))
+	ax.set_yticks(np.round(np.linspace(0,1,5),2))
 	plt.show()
 	
 ![loss](Figures/loss_.png)
