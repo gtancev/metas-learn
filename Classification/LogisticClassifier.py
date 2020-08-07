@@ -5,9 +5,9 @@ __copyright__ = "© Georgi Tancev"
 import numpy as np
 
 
-class LinearRegressor:
+class LogisticClassifier:
     """
-    Linear regression implementation.
+    Logistic regression implementation.
     It uses stochastic gradient descent (SGD) with random sampling of batches.
     Inputs: batch_size: size of batch in SGD steps
             alpha: L2-regularization parameter in SGD steps
@@ -35,16 +35,17 @@ class LinearRegressor:
         return np.random.normal(loc, scale, shape)
 
     @staticmethod
-    def mean_squared_error(y_pred, y_true):
+    def binary_crossentropy(y_pred, y_true):
         """
-        Compute mean squared error loss.
+        Compute binary cross-entropy.
         Input:  y_pred: prediction
                 y_true: true values
         Output: loss
         """
-        e = np.subtract(y_pred, y_true)
-        beta = (1 / y_true.shape[1])
-        return beta * np.dot(e, np.transpose(e))
+        l1 = np.dot(y_true, np.transpose(np.log(y_pred)))
+        l2 = np.dot(1 - y_true, np.transpose(np.log(1 - y_pred)))
+        beta = - (1 / y_true.shape[1])
+        return beta * np.add(l1, l2)
 
     @staticmethod
     def sample(low, high, size):
@@ -56,6 +57,15 @@ class LinearRegressor:
         Output: index of samples
         """
         return np.random.randint(low, high, size)
+
+    @staticmethod
+    def sigmoid(Z):
+        """
+        Sigmoid activation function.
+        Input:  Z
+        Output: Sigmoid(Z)
+        """
+        return np.divide(1.0, np.add(1.0, np.exp(-Z)))
 
     def _initialize_coeffs(self, n_features, n_outputs):
         """
@@ -74,7 +84,8 @@ class LinearRegressor:
         Input:  X: matrix with samples
         Output: y: prediction of samples
         """
-        return np.add(np.dot(self.coeffs, X), self.intercept)
+        Z = np.add(np.dot(self.coeffs, X), self.intercept)
+        return self.sigmoid(Z)
 
     def _compute_gradients(self, X, y):
         """
@@ -143,7 +154,7 @@ class LinearRegressor:
             y_pred = self._forward(X[:, sample])
 
             # compute cost
-            cost = self.mean_squared_error(y_pred, y[:, sample])
+            cost = self.binary_crossentropy(y_pred, y[:, sample])
 
             # add cost to list
             self.loss[i] = cost

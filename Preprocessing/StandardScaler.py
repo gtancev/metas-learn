@@ -9,6 +9,8 @@ class StandardScaler:
     """
     Class to scale data by subtracting mean and
     dividing by standard deviation (Z-scores).
+    Inputs: with_mean: whether to appy mean normalization
+            with_std: whether to scale by standard deviation
     """
     def __init__(self, with_mean=True, with_std=True):
         self.with_mean = with_mean
