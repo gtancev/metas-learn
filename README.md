@@ -1,5 +1,7 @@
 # metas-learn
 Collection of machine learning algorithms implemented in Python as part of a project funded by the Swiss Innovation Agency (36779.1 IP-ENG), read more about it here: https://www.aramis.admin.ch/Grunddaten/?ProjectID=44523.
+The algorithms have been implemented as standalone classes; this leads to redundancy and more code because the same functions are present in several files, but it easier to modify or implement them as part of A.I. solutions.
+The regression and classification algorithms are based on stochastic gradient descent and the clustering algorithm is based on expectation-maximization.
 
 ## Examples
 
