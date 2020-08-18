@@ -24,7 +24,6 @@ class NeuralNetworkRegressor:
         self.n_iterations = int(n_iterations)
         self.warm_start = warm_start
         self.coeffs = {}
-        self.loss = np.empty((int(n_iterations)), dtype=float)
 
     @property
     def num_hidden_layers(self):
@@ -264,6 +263,9 @@ class NeuralNetworkRegressor:
 
         n_features = X.shape[0]  # number of features in X
         n_outputs = y.shape[0]  # number of outputs in y
+        
+        # initialize array for loss
+        self.loss = np.empty((int(self.n_iterations)), dtype=float)
 
         if (not self.warm_start) or (len(self.coeffs) == 0):
             # initialize coefficients
