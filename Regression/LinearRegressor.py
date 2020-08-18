@@ -21,7 +21,6 @@ class LinearRegressor:
         self.learning_rate = learning_rate
         self.n_iterations = int(n_iterations)
         self.warm_start = warm_start
-        self.loss = np.empty((int(n_iterations)), dtype=float)
 
     @staticmethod
     def random_normal(shape, loc=0.0, scale=1.0):
@@ -123,6 +122,9 @@ class LinearRegressor:
 
         n_features = X.shape[0]  # number of features in X
         n_outputs = y.shape[0]  # number of outputs in y
+        
+        # initialize array for loss
+        self.loss = np.empty((int(self.n_iterations)), dtype=float)
 
         if (not self.warm_start):
             # initialize coefficients
