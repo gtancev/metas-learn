@@ -5,9 +5,10 @@ The algorithms have been implemented as standalone classes; this leads to redund
 
 The **regression** and **classification** algorithms are based on **stochastic gradient descent** (and the clustering algorithm is based on expectation-maximization). Gradient descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function, e.g. **mean squared error** in regression or **binary cross-entropy** in classification. Gradient descent is based on the observation that if the multi-variable function C(W) is defined and differentiable in a neighborhood of a point W, then C(W) decreases fastest if one goes from W in the direction of the negative gradient of C at W, -dC/dW. 
 
+![gradient](Figures/gradient.png)
+
 However, by including only a randomly selected subset of data in the computation of the gradient, the algorithm becomes stochastic since it replaces the actual gradient (calculated from the entire data set) by an estimate thereof (calculated from a randomly selected subset of the data).
 
-![gradient](Figures/gradient.png)
 
 ## Examples
 
