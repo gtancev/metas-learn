@@ -120,6 +120,8 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    ax.set_ylabel("true positive rate")
 	    ax.set_xlim(-0.035, 1.035)
 	    ax.set_ylim(-0.035, 1.035)
+	    ax.set_xticks((0, 0.5, 1))
+	    ax.set_yticks((0, 0.5, 1))
 	    plt.show()
 	    
 ![congruency](Figures/congruency_LC.png)
