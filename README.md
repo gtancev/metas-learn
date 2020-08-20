@@ -33,6 +33,8 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
+##### Learning Curve
+
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
@@ -41,34 +43,29 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    ax.set_ylabel("loss")
 	    ax.set_xscale("log")
 	    ax.set_yscale("log")
-	    ax.set_xlim(1e-1, 1e5)
-	    ax.set_ylim(1e-1, 1e3)
-	    ax.set_xticks((1e-1, 1e1, 1e3, 1e5))
-	    ax.set_yticks((1e-1, 1e0, 1e1, 1e2, 1e3))
 	    plt.show()
 	
 ![loss](Figures/loss_NN.png)
+
+##### Agreement
 
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
 	    ax.plot([-4, 4], [-4, 4], ":", color="k", alpha=1.0)
 	    ax.scatter(y, y_pred, s=8, alpha=1.0)
-	    ax.set_xlim(-4, 4)
-	    ax.set_ylim(-4, 4)
 	    ax.set_xlabel("ground truth")
 	    ax.set_ylabel("prediction")
-	    ax.set_xticks(np.round(np.linspace(-4, 4, 5), 2))
-	    ax.set_yticks(np.round(np.linspace(-4, 4, 5), 2))
 	    plt.show()
 	
-![congruency](Figures/congruency.png)
+![congruency](Figures/congruency_NN.png)
 
 ### Classification
 
 #### Load libraries.
   	from StandardScaler import StandardScaler
 	from LogisticClassifier import LogisticClassifier
+	from sklearn.metrics import roc_curve
 	import numpy as np
 	from sklearn.datasets import load_breast_cancer
 	import matplotlib.pyplot as plt
@@ -87,6 +84,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
+##### Learning Curve
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
@@ -95,10 +93,19 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    ax.set_ylabel("loss")
 	    ax.set_xscale("log")
 	    ax.set_yscale("log")
-	    ax.set_xlim(1e-1, 1e5)
-	    ax.set_ylim(1e-1, 1e1)
-	    ax.set_xticks((1e-1, 1e1, 1e3, 1e5))
-	    ax.set_yticks((1e-1, 1e0, 1e1))
 	    plt.show()
 	
 ![loss](Figures/loss_LC.png)
+
+##### Receiver Operating Characteristic (ROC)
+	fpr, tpr, thresholds = roc_curve(y, y_pred, pos_label=1)
+	with plt.xkcd():
+	    fig = plt.figure(figsize=(2.00, 2.00))
+	    ax = fig.add_subplot(111)
+	    ax.plot(fpr, tpr, "-")
+	    ax.plot([0, 1], [0, 1], ":", color="k", alpha=1.0)
+	    ax.set_xlabel("false positive rate")
+	    ax.set_ylabel("true positive rate")
+	    plt.show()
+	    
+![congruency](Figures/congruency_LC.png)
