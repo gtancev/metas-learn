@@ -73,6 +73,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 #### Load libraries.
   	from StandardScaler import StandardScaler
 	from LogisticClassifier import LogisticClassifier
+	from sklearn.metrics import roc_curve
 	import numpy as np
 	from sklearn.datasets import load_breast_cancer
 	import matplotlib.pyplot as plt
