@@ -30,29 +30,34 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
-	fig = plt.figure(figsize=(2.95,2.95))
-	ax = fig.add_subplot(111)
-	ax.plot(np.arange(1, len(nnr.loss)+1), nnr.loss, ".", ms=4, color=plt.cm.viridis(0.5), alpha=1.0)
-	ax.set_xlabel('iteration')
-	ax.set_ylabel('loss')
-	ax.set_xlim(1e-1, 1e4)
-	ax.set_ylim(0, 50)
-	ax.set_xticks(np.round(np.linspace(0,1e4,5),2))
-	ax.set_yticks(np.round(np.linspace(0,50,5),2))
-	plt.show()
+	with plt.xkcd():
+	    fig = plt.figure(figsize=(2.00, 2.00))
+	    ax = fig.add_subplot(111)
+	    ax.scatter(np.arange(1, len(nnr.loss)+1), np.array(nnr.loss).flatten(), s=8)
+	    ax.set_xlabel("iteration")
+	    ax.set_ylabel("loss")
+	    ax.set_xscale("log")
+	    ax.set_yscale("log")
+	    ax.set_xlim(1e-1, 1e5)
+	    ax.set_ylim(1e-1, 1e3)
+	    ax.set_xticks((1e-1, 1e1, 1e3, 1e5))
+	    ax.set_yticks((1e-1, 1e0, 1e1, 1e2, 1e3))
+	    plt.show()
 	
 ![loss](Figures/loss_NN.png)
 
-	fig = plt.figure(figsize=(2.95,2.95))
-	ax = fig.add_subplot(111)
-	ax.scatter(y_pred, y, color=plt.cm.viridis(0.5), s=6, alpha=1.0)
-	ax.set_xlim(-4, 4)
-	ax.set_ylim(-4, 4)
-	ax.set_xlabel('prediction')
-	ax.set_ylabel('ground truth')
-	ax.set_xticks(np.round(np.linspace(-4,4,5),2))
-	ax.set_yticks(np.round(np.linspace(-4,4,5),2))
-	plt.show()
+	with plt.xkcd():
+	    fig = plt.figure(figsize=(2.00, 2.00))
+	    ax = fig.add_subplot(111)
+	    ax.plot([-4, 4], [-4, 4], ":", color="k", alpha=1.0)
+	    ax.scatter(y, y_pred, s=8, alpha=1.0)
+	    ax.set_xlim(-4, 4)
+	    ax.set_ylim(-4, 4)
+	    ax.set_xlabel("ground truth")
+	    ax.set_ylabel("prediction")
+	    ax.set_xticks(np.round(np.linspace(-4, 4, 5), 2))
+	    ax.set_yticks(np.round(np.linspace(-4, 4, 5), 2))
+	    plt.show()
 	
 ![congruency](Figures/congruency.png)
 
@@ -79,15 +84,18 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
-	fig = plt.figure(figsize=(2.95,2.95))
-	ax = fig.add_subplot(111)
-	ax.plot(np.arange(1, len(lc.loss)+1), lc.loss, ".", ms=4, color=plt.cm.viridis(0.5), alpha=1.0)
-	ax.set_xlabel('iteration')
-	ax.set_ylabel('loss')
-	ax.set_xlim(1e-1, 1e4)
-	ax.set_ylim(0, 1)
-	ax.set_xticks(np.round(np.linspace(0,1e4,5),2))
-	ax.set_yticks(np.round(np.linspace(0,1,5),2))
-	plt.show()
+	with plt.xkcd():
+	    fig = plt.figure(figsize=(2.00, 2.00))
+	    ax = fig.add_subplot(111)
+	    ax.scatter(np.arange(1, len(lc.loss)+1), np.array(lc.loss).flatten(), s=8)
+	    ax.set_xlabel("iteration")
+	    ax.set_ylabel("loss")
+	    ax.set_xscale("log")
+	    ax.set_yscale("log")
+	    ax.set_xlim(1e-1, 1e5)
+	    ax.set_ylim(1e-1, 1e1)
+	    ax.set_xticks((1e-1, 1e1, 1e3, 1e5))
+	    ax.set_yticks((1e-1, 1e0, 1e1))
+	    plt.show()
 	
 ![loss](Figures/loss_LC.png)
