@@ -3,6 +3,8 @@ Collection of machine learning algorithms implemented in Python as part of a pro
 The algorithms have been implemented as standalone classes; this leads to redundancy and more code because the same functions are present in several files, but it easier to modify or implement them as part of A.I. solutions.
 The regression and classification algorithms are based on stochastic gradient descent and the clustering algorithm is based on expectation-maximization.
 
+![gradient](Figures/gradient.png)
+
 ## Examples
 
 ### Regression
