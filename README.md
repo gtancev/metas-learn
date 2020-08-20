@@ -33,6 +33,8 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
+##### Learning Curve
+
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
@@ -49,6 +51,8 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 ![loss](Figures/loss_NN.png)
 
+##### Agreement
+
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
@@ -62,7 +66,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    ax.set_yticks(np.round(np.linspace(-4, 4, 5), 2))
 	    plt.show()
 	
-![congruency](Figures/congruency.png)
+![congruency](Figures/congruency_NN.png)
 
 ### Classification
 
@@ -87,6 +91,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 #### Evaluate model.
 
+##### Learning Curve
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
@@ -102,3 +107,18 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    plt.show()
 	
 ![loss](Figures/loss_LC.png)
+
+##### Receiver Operating Characteristic (ROC)
+	fpr, tpr, thresholds = roc_curve(y, y_pred, pos_label=1)
+	with plt.xkcd():
+	    fig = plt.figure(figsize=(2.00, 2.00))
+	    ax = fig.add_subplot(111)
+	    ax.plot(fpr, tpr, "-")
+	    ax.plot([-4, 4], [-4, 4], ":", color="k", alpha=1.0)
+	    ax.set_xlabel("false positive rate")
+	    ax.set_ylabel("true positive rate")
+	    ax.set_xlim(-0.035, 1.035)
+	    ax.set_ylim(-0.035, 1.035)
+	    plt.show()
+	    
+![congruency](Figures/congruency_LC.png)
