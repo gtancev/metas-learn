@@ -67,7 +67,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 #### Load libraries.
   	from StandardScaler import StandardScaler
 	from LogisticClassifier import LogisticClassifier
-	from sklearn.metrics import roc_curve
+	from sklearn.metrics import precision_recall_curve
 	import numpy as np
 	from sklearn.datasets import load_breast_cancer
 	import matplotlib.pyplot as plt
@@ -99,15 +99,15 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	
 ![loss](Figures/loss_LC.png)
 
-##### Receiver Operating Characteristic (ROC)
-	fpr, tpr, thresholds = roc_curve(y, y_pred, pos_label=1)
+##### Precision-Recall Curve
+	precision, recall, thresholds = precision_recall_curve(y, y_pred, pos_label=1)
 	with plt.xkcd():
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
-	    ax.plot(fpr, tpr, "-")
-	    ax.plot([0, 1], [0, 1], ":", color="k", alpha=1.0)
-	    ax.set_xlabel("false positive rate")
-	    ax.set_ylabel("true positive rate")
+	    ax.fill_between(recall, precision)
+	    ax.plot([1, 0], [0, 1], ":", color="k", alpha=1.0)
+	    ax.set_xlabel("recall")
+	    ax.set_ylabel("precision")
 	    plt.show()
 	    
 ![congruency](Figures/congruency_LC.png)
