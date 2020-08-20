@@ -105,7 +105,7 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 	    fig = plt.figure(figsize=(2.00, 2.00))
 	    ax = fig.add_subplot(111)
 	    ax.fill_between(recall, precision)
-	    ax.plot([0, 1], [0, 1], ":", color="k", alpha=1.0)
+	    ax.plot([1, 0], [0, 1], ":", color="k", alpha=1.0)
 	    ax.set_xlabel("recall")
 	    ax.set_ylabel("precision")
 	    plt.show()
