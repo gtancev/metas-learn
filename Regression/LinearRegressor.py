@@ -42,7 +42,7 @@ class LinearRegressor:
         Output: loss
         """
         e = np.subtract(y_pred, y_true)
-        return np.transpose(np.sum(np.multiply(e, e), axis=1))
+        return np.transpose(np.mean(np.multiply(e, e), axis=1))
 
     @staticmethod
     def sample(low, high, size):
