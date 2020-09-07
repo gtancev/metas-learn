@@ -79,8 +79,7 @@ class NeuralNetworkRegressor:
         Output: loss
         """
         e = np.subtract(y_pred, y_true)
-        beta = (1 / y_true.shape[1])
-        return beta * np.dot(e, np.transpose(e))
+        return np.transpose(np.sum(np.multiply(e, e), axis=1))
 
     @staticmethod
     def sample(low, high, size):
@@ -265,7 +264,7 @@ class NeuralNetworkRegressor:
         n_outputs = y.shape[0]  # number of outputs in y
         
         # initialize array for loss
-        self.loss = np.empty((int(self.n_iterations)), dtype=float)
+        self.loss = np.empty((int(self.n_iterations), int(n_outputs)), dtype=float)
 
         if (not self.warm_start) or (len(self.coeffs) == 0):
             # initialize coefficients
@@ -289,7 +288,7 @@ class NeuralNetworkRegressor:
             cost = self.mean_squared_error(y_pred, y[:, sample])
 
             # add cost to list
-            self.loss[i] = cost
+            self.loss[i, :] = cost
 
             # iterate over layers backward to get gradients
             gradients = self._backward_pass(y_pred, y[:, sample], caches)
