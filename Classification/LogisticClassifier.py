@@ -42,9 +42,10 @@ class LogisticClassifier:
         Output: loss
         """
         l1 = np.dot(y_true, np.transpose(np.log(y_pred)))
-        l2 = np.dot(1 - y_true, np.transpose(np.log(1 - y_pred)))
-        beta = - (1 / y_true.shape[1])
-        return beta * np.add(l1, l2)
+        l2 = np.dot(np.subtract(1.0, y_true), 
+            np.transpose(np.log(np.subtract(1.0, y_pred))))
+        beta = (- 1.0 / y_true.shape[1])
+        return np.multiply(beta, np.add(l1, l2))
 
     @staticmethod
     def sample(low, high, size):
@@ -93,7 +94,7 @@ class LogisticClassifier:
                 y: matrix with outputs
         Output: gradients
         """
-        beta = - 2 / self.batch_size
+        beta = (- 2.0 / self.batch_size)
         dW = beta * np.dot(np.subtract(y, self._forward(X)), np.transpose(X))
         db = beta * np.sum(np.subtract(y, self._forward(X)))
         return (dW, db)
@@ -104,12 +105,14 @@ class LogisticClassifier:
         Input:  gradients
         Output: none
         """
-        beta = (1 - self.alpha * self.learning_rate / self.batch_size)
+        beta = (1.0 - self.alpha * self.learning_rate / self.batch_size)
 
         dW, db = gradients
 
-        self.coeffs = np.subtract(beta * self.coeffs, self.learning_rate * dW)
-        self.intercept = np.subtract(beta * self.intercept, self.learning_rate * db)
+        self.coeffs = np.subtract(np.multiply(beta, self.coeffs),
+            np.multiplty(self.learning_rate, dW))
+        self.intercept = np.subtract(np.multiply(beta, self.intercept), 
+            np.multiply(self.learning_rate, db))
         return
 
     def fit(self, X, y):
