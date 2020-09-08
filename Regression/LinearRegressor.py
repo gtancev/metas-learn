@@ -15,7 +15,7 @@ class LinearRegressor:
             n_iterations: number of SGD iterations
             warm_start: whether to use old parameters as starting point
     """
-    def __init__(self, batch_size=300, alpha=0.0, learning_rate=1e-3, n_iterations=1e4, warm_start=False):
+    def __init__(self, batch_size=300, alpha=0.0, learning_rate=1e-2, n_iterations=1e4, warm_start=False):
         self.batch_size = batch_size
         self.alpha = alpha
         self.learning_rate = learning_rate
@@ -81,9 +81,10 @@ class LinearRegressor:
                 y: matrix with outputs
         Output: gradients
         """
-        beta = - 2 / self.batch_size
-        dW = beta * np.dot(np.subtract(y, self._forward(X)), np.transpose(X))
-        db = beta * np.sum(np.subtract(y, self._forward(X)))
+        beta = (- 2.0 / self.batch_size)
+
+        dW = np.multiply(beta, np.dot(np.subtract(y, self._forward(X)), np.transpose(X)))
+        db = np.multiply(beta, np.sum(np.subtract(y, self._forward(X))))
         return (dW, db)
 
     def _gradient_descent(self, gradients):
@@ -92,12 +93,14 @@ class LinearRegressor:
         Input:  gradients
         Output: none
         """
-        beta = (1 - self.alpha * self.learning_rate / self.batch_size)
+        beta = (1.0 - self.alpha * self.learning_rate / self.batch_size)
 
         dW, db = gradients
 
-        self.coeffs = np.subtract(beta * self.coeffs, self.learning_rate * dW)
-        self.intercept = np.subtract(beta * self.intercept, self.learning_rate * db)
+        self.coeffs = np.subtract(np.multiply(beta, self.coeffs), 
+            np.multiply(self.learning_rate, dW))
+        self.intercept = np.subtract(np.multiply(beta, self.intercept),
+            np.multiply(self.learning_rate, db))
         return
 
     def fit(self, X, y):

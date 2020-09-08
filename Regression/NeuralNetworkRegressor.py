@@ -16,7 +16,7 @@ class NeuralNetworkRegressor:
             n_iterations: number of SGD iterations
             warm_start: whether to use old parameters as starting point
     """
-    def __init__(self, hidden_layer_sizes=(10,), batch_size=300, alpha=0.0, learning_rate=1e-3, n_iterations=1e4, warm_start=False):
+    def __init__(self, hidden_layer_sizes=(10,), batch_size=300, alpha=0.0, learning_rate=1e-2, n_iterations=1e4, warm_start=False):
         self.hidden_layer_sizes = hidden_layer_sizes
         self.batch_size = batch_size
         self.alpha = alpha
@@ -39,7 +39,7 @@ class NeuralNetworkRegressor:
         Input:  Z: weightes latent variables
         Output: A: activations
         """
-        return 1.0 / (1.0 + np.exp(-Z))
+        return np.divide(1.0, np.add(1.0, np.exp(-Z)))
 
     @staticmethod
     def linear(Z):
@@ -57,7 +57,7 @@ class NeuralNetworkRegressor:
         Input:  Z: weighted latent variables
         Output: A: activations
         """
-        return np.maximum(0, Z)
+        return np.maximum(0.0, Z)
 
     @staticmethod
     def random_normal(shape, loc=0.0, scale=1.0):
@@ -173,7 +173,7 @@ class NeuralNetworkRegressor:
         Output: dZ: delta of weighted previous activations
         """
         A = self.relu(Z)
-        dZ = np.multiply(dA, np.int64(A > 0))
+        dZ = np.multiply(dA, np.int64(A > 0.0))
         return dZ
 
     def _linear_gradient(self, dA, Z):
@@ -194,10 +194,10 @@ class NeuralNetworkRegressor:
         """
         (A_last, W, _), Z = cache
         dZ = activation_fn(dA, Z)
-        beta = (1 / self.batch_size)
+        beta = (1.0 / self.batch_size)
 
-        dW = beta * np.dot(dZ, np.transpose(A_last))
-        db = beta * np.sum(dZ, axis=1, keepdims=True)
+        dW = np.multiply(beta, np.dot(dZ, np.transpose(A_last)))
+        db = np.multiply(beta, np.sum(dZ, axis=1, keepdims=True))
         dA_last = np.dot(np.transpose(W), dZ)
         return dA_last, dW, db
 
@@ -232,13 +232,13 @@ class NeuralNetworkRegressor:
         Output: none
         """
         n_layers = self.num_hidden_layers
-        beta = (1 - self.alpha * self.learning_rate / self.batch_size)
+        beta = (1.0 - self.alpha * self.learning_rate / self.batch_size)
 
         for layer in range(0, n_layers + 1):
-            self.coeffs["W" + str(layer)] = np.subtract(beta * self.coeffs[
-                "W" + str(layer)], self.learning_rate * gradients["dW" + str(layer)])
-            self.coeffs["b" + str(layer)] = np.subtract(beta * self.coeffs[
-                "b" + str(layer)], self.learning_rate * gradients["db" + str(layer)])
+            self.coeffs["W" + str(layer)] = np.subtract(np.multiply(beta, self.coeffs[
+                "W" + str(layer)]), np.multiply(self.learning_rate, gradients["dW" + str(layer)]))
+            self.coeffs["b" + str(layer)] = np.subtract(np.multiply(beta, self.coeffs[
+                "b" + str(layer)]), np.multiply(self.learning_rate, gradients["db" + str(layer)]))
         return
 
     def fit(self, X, y):
