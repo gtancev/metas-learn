@@ -36,29 +36,10 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 #### Evaluate model.
 
 ##### Learning Curve
-
-	with plt.xkcd():
-	    fig = plt.figure(figsize=(2.00, 2.00))
-	    ax = fig.add_subplot(111)
-	    ax.scatter(np.arange(1, len(nnr.loss)+1), np.array(nnr.loss).flatten(), s=8)
-	    ax.set_xlabel("iteration")
-	    ax.set_ylabel("loss")
-	    ax.set_xscale("log")
-	    ax.set_yscale("log")
-	    plt.show()
 	
 ![loss](Figures/loss_NN.png)
 
 ##### Agreement
-
-	with plt.xkcd():
-	    fig = plt.figure(figsize=(2.00, 2.00))
-	    ax = fig.add_subplot(111)
-	    ax.plot([-4, 4], [-4, 4], ":", color="k", alpha=1.0)
-	    ax.scatter(y, y_pred, s=8, alpha=1.0)
-	    ax.set_xlabel("ground truth")
-	    ax.set_ylabel("prediction")
-	    plt.show()
 	
 ![congruency](Figures/congruency_NN.png)
 
@@ -87,27 +68,9 @@ As a guidline, it is recommended to scale data before training, e.g. using a sta
 #### Evaluate model.
 
 ##### Learning Curve
-	with plt.xkcd():
-	    fig = plt.figure(figsize=(2.00, 2.00))
-	    ax = fig.add_subplot(111)
-	    ax.scatter(np.arange(1, len(lc.loss)+1), np.array(lc.loss).flatten(), s=8)
-	    ax.set_xlabel("iteration")
-	    ax.set_ylabel("loss")
-	    ax.set_xscale("log")
-	    ax.set_yscale("log")
-	    plt.show()
 	
 ![loss](Figures/loss_LC.png)
 
 ##### Precision-Recall Curve
-	precision, recall, thresholds = precision_recall_curve(y, y_pred, pos_label=1)
-	with plt.xkcd():
-	    fig = plt.figure(figsize=(2.00, 2.00))
-	    ax = fig.add_subplot(111)
-	    ax.fill_between(recall, precision)
-	    ax.plot([1, 0], [0, 1], ":", color="k", alpha=1.0)
-	    ax.set_xlabel("recall")
-	    ax.set_ylabel("precision")
-	    plt.show()
 	    
 ![congruency](Figures/congruency_LC.png)
