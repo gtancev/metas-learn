@@ -41,10 +41,10 @@ class LogisticClassifier:
                 y_true: true values
         Output: loss
         """
+        beta = (- 1.0 / y_true.shape[1])
         l1 = np.dot(y_true, np.transpose(np.log(y_pred)))
         l2 = np.dot(np.subtract(1.0, y_true), 
             np.transpose(np.log(np.subtract(1.0, y_pred))))
-        beta = (- 1.0 / y_true.shape[1])
         return np.multiply(beta, np.add(l1, l2))
 
     @staticmethod
