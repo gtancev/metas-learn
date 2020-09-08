@@ -81,9 +81,9 @@ class LinearRegressor:
                 y: matrix with outputs
         Output: gradients
         """
-        beta = - 2 / self.batch_size
-        dW = beta * np.dot(np.subtract(y, self._forward(X)), np.transpose(X))
-        db = beta * np.sum(np.subtract(y, self._forward(X)))
+        beta = (- 2.0 / self.batch_size)
+        dW = np.multiply(beta, np.dot(np.subtract(y, self._forward(X)), np.transpose(X)))
+        db = np.multiply(beta, np.sum(np.subtract(y, self._forward(X))))
         return (dW, db)
 
     def _gradient_descent(self, gradients):
@@ -96,8 +96,10 @@ class LinearRegressor:
 
         dW, db = gradients
 
-        self.coeffs = np.subtract(beta * self.coeffs, self.learning_rate * dW)
-        self.intercept = np.subtract(beta * self.intercept, self.learning_rate * db)
+        self.coeffs = np.subtract(np.multiply(beta, self.coeffs), 
+            np.multiply(self.learning_rate, dW))
+        self.intercept = np.subtract(np.multiply(beta, self.intercept),
+            np.multiply(self.learning_rate, db))
         return
 
     def fit(self, X, y):
