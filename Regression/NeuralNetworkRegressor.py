@@ -16,7 +16,7 @@ class NeuralNetworkRegressor:
             n_iterations: number of SGD iterations
             warm_start: whether to use old parameters as starting point
     """
-    def __init__(self, hidden_layer_sizes=(10,), batch_size=300, alpha=0.0, learning_rate=1e-3, n_iterations=1e4, warm_start=False):
+    def __init__(self, hidden_layer_sizes=(10,), batch_size=300, alpha=0.0, learning_rate=1e-2, n_iterations=1e4, warm_start=False):
         self.hidden_layer_sizes = hidden_layer_sizes
         self.batch_size = batch_size
         self.alpha = alpha
