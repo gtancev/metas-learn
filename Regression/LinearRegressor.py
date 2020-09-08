@@ -92,7 +92,7 @@ class LinearRegressor:
         Input:  gradients
         Output: none
         """
-        beta = (1 - self.alpha * self.learning_rate / self.batch_size)
+        beta = (1.0 - self.alpha * self.learning_rate / self.batch_size)
 
         dW, db = gradients
 
