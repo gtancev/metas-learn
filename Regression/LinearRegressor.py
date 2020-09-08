@@ -82,6 +82,7 @@ class LinearRegressor:
         Output: gradients
         """
         beta = (- 2.0 / self.batch_size)
+
         dW = np.multiply(beta, np.dot(np.subtract(y, self._forward(X)), np.transpose(X)))
         db = np.multiply(beta, np.sum(np.subtract(y, self._forward(X))))
         return (dW, db)
