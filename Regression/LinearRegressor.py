@@ -15,7 +15,7 @@ class LinearRegressor:
             n_iterations: number of SGD iterations
             warm_start: whether to use old parameters as starting point
     """
-    def __init__(self, batch_size=300, alpha=0.0, learning_rate=1e-2, n_iterations=1e4, warm_start=False):
+    def __init__(self, batch_size=300, alpha=0.0, learning_rate=1e-3, n_iterations=1e4, warm_start=False):
         self.batch_size = batch_size
         self.alpha = alpha
         self.learning_rate = learning_rate
